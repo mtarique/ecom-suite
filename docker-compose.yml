@@ -1,39 +1,46 @@
-version: '3.9'
-
+# version: '3.8'
 services:
-  api:
+  ecom-suite-api:
+    image: ecom-suite-api:latest
     build:
       context: ./api
+      dockerfile: Dockerfile
+    container_name: ecom-suite-api
     ports:
       - "4000:3000"
-    volumes:
+    volumes: 
       - ./api:/app
-      - /app/node_modules
-    environment:
-      - NODE_ENV=development
-      - PORT=3000
-    command: npm run dev
+    env_file: 
+      - ./api/.env
+    networks: 
+      - ecom-suite-network
 
-  crm:
-    build:
-      context: ./crm
-    ports:
-      - "3001:3000"
-    volumes:
-      - ./crm:/app
-      - /app/node_modules
-    environment:
-      - REACT_APP_API_URL=http://localhost:4000
-    command: npm start
+  # ecom-suite-crm:
+  #   build:
+  #     context: ./crm
+  #   ports:
+  #     - "4001:3000"
+  #   volumes:
+  #     - ./crm:/app
+  #     # - /app/node_modules
+  #   environment:
+  #     - REACT_APP_API_URL=http://localhost:4001
+  #   networks: 
+  #     - ecom-suite-network
 
-  web:
-    build:
-      context: ./web
-    ports:
-      - "3002:3000"
-    volumes:
-      - ./web:/app
-      - /app/node_modules
-    environment:
-      - REACT_APP_API_URL=http://localhost:4000
-    command: npm start
+  # ecom-suite-web:
+  #   build:
+  #     context: ./web
+  #   ports:
+  #     - "4002:3000"
+  #   volumes:
+  #     - ./web:/app
+  #     # - /app/node_modules
+  #   environment:
+  #     - REACT_APP_API_URL=http://localhost:4002
+  #   networks: 
+  #     - ecom-suite-network
+
+networks:
+  ecom-suite-network:
+    driver: bridge

@@ -13,3 +13,5 @@ This is a complete e-commerce platform with store, crm and cms connecting to API
 ---
 
 Feel free to expand or customize this further in your `README.md` file to fit the context of your project!
+
+https://chatgpt.com/share/67488ab5-47e8-8003-9a7c-9beb7a44913f
