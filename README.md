@@ -1,4 +1,4 @@
-# ecommerce-platform
+# ecom-suite
 This is a complete e-commerce platform with store, crm and cms connecting to API built on MERN stack 
 
 ## Description
