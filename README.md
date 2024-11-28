@@ -1,5 +1,5 @@
 # ecommerce-platform
-Will contain e-commerce, CRM and api and website
+This is a complete e-commerce platform with store, crm and cms connecting to API built on MERN stack 
 
 ## Description
 
