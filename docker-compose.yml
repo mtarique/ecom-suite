@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: ecom-suite-api
     ports:
-      - "4000:3000"
+      - "4001:3000"
     volumes: 
       - ./api:/app
     env_file: 
@@ -15,29 +15,34 @@ services:
     networks: 
       - ecom-suite-network
 
+  ecom-suite-web:
+    image: ecom-suite-web:latest
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    container_name: ecom-suite-web
+    ports:
+      - "4002:3000"
+    volumes:
+      - ./web:/app
+      # - /app/node_modules
+    env_file: 
+      - ./web/.env
+    # environment:
+    #   - REACT_APP_API_URL=http://localhost:4001
+    networks: 
+      - ecom-suite-network
+
   # ecom-suite-crm:
   #   build:
   #     context: ./crm
   #   ports:
-  #     - "4001:3000"
+  #     - "4003:3000"
   #   volumes:
   #     - ./crm:/app
   #     # - /app/node_modules
   #   environment:
   #     - REACT_APP_API_URL=http://localhost:4001
-  #   networks: 
-  #     - ecom-suite-network
-
-  # ecom-suite-web:
-  #   build:
-  #     context: ./web
-  #   ports:
-  #     - "4002:3000"
-  #   volumes:
-  #     - ./web:/app
-  #     # - /app/node_modules
-  #   environment:
-  #     - REACT_APP_API_URL=http://localhost:4002
   #   networks: 
   #     - ecom-suite-network
 

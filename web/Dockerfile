@@ -16,5 +16,5 @@ COPY . .
 # Expose the development server port
 EXPOSE 3000
 
-# Default command to run the React app
+# Default command to run the React app (start development server)
 CMD ["npm", "start"]
