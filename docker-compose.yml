@@ -14,6 +14,8 @@ services:
       - ./api/.env
     networks: 
       - ecom-suite-network
+    depends_on:
+      - ecom-suite-db
 
   ecom-suite-web:
     image: ecom-suite-web:latest
@@ -49,6 +51,22 @@ services:
     networks: 
       - ecom-suite-network
 
+  ecom-suite-db:
+    image: mongo:6
+    container_name: ecom-suite-db
+    ports:
+      - "27017:27017"
+    volumes:
+      - ecom-suite-db-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - ecom-suite-network
+
 networks:
   ecom-suite-network:
     driver: bridge
+
+volumes:
+  ecom-suite-db-data:
