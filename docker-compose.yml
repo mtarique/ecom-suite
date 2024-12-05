@@ -33,18 +33,21 @@ services:
     networks: 
       - ecom-suite-network
 
-  # ecom-suite-crm:
-  #   build:
-  #     context: ./crm
-  #   ports:
-  #     - "4003:3000"
-  #   volumes:
-  #     - ./crm:/app
-  #     # - /app/node_modules
-  #   environment:
-  #     - REACT_APP_API_URL=http://localhost:4001
-  #   networks: 
-  #     - ecom-suite-network
+  ecom-suite-crm:
+    image: ecom-suite-crm:latest
+    build:
+      context: ./crm
+      dockerfile: Dockerfile
+    container_name: ecom-suite-crm
+    ports:
+      - "4003:3000"
+    volumes:
+      - ./crm:/app
+      - ./crm/node_modules:/app/node_modules
+    env_file:
+      - ./web/.env
+    networks: 
+      - ecom-suite-network
 
 networks:
   ecom-suite-network:
