@@ -1,15 +1,39 @@
 import React, { useState } from "react";
 import "./App.css";
+import { BrowserRouter, Route, Routes, Switch } from 'react-router-dom';
 import Layout from "./components/Layout";
+import Signup from './components/Signup';
+import Signin from './components/Signin'; // Your Login component
 
-function App() {
-    return (
-      <Layout>
-        <h1>Welcome to MyApp</h1>
-        <p>This is a simple template with a header, footer, and layout using Bootstrap 5.</p>
-      </Layout>
-    );
-  }
+const App = () => {
+  return (
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/signup" element={<Signup />} />
+          <Route exact path="/signin" element={<Signin />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
+};
+
+// function App() {
+    // return (
+    //   <Layout>
+    //     <h1>Welcome to MyApp</h1>
+    //     <p>This is a simple template with a header, footer, and layout using Bootstrap 5.</p>
+    //   </Layout>
+    // );
+
+    // return (
+          
+    //     <Switch>
+    //       <Route exact path="/signup" component={Signup} />
+    //     </Switch>
+      
+    // );
+  // }
 
 // function App() {
 //   const [formData, setFormData] = useState({
