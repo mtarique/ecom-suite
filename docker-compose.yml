@@ -54,13 +54,13 @@ services:
   ecom-suite-db:
     image: mongo:6
     container_name: ecom-suite-db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DB_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
     ports:
       - "27017:27017"
     volumes:
       - ecom-suite-db-data:/data/db
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${DB_USERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: ${DB_PASSWORD}
     networks:
       - ecom-suite-network
 

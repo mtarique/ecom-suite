@@ -1,0 +1,11 @@
+For mongodb in root
+DB_USERNAME=mtarique
+DB_PASSWORD=mt7Database
+
+For node API in api folder
+NODE_ENV=development
+PORT=3000
+DB_USERNAME=mtarique
+DB_PASSWORD=mt7Database
+
+Above is just an example to start with

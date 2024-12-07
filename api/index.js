@@ -6,6 +6,12 @@ require('dotenv').config();
 
 const app = express(); 
 
+// Connect to mongodb database
+const uri = `mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@ecom-suite-db:27017/ecom-suite-db?authSource=admin`;
+mongoose.set('strictQuery', true);
+mongoose.connect(uri); 
+mongoose.connection.on("error", err => console.log("MongoDB could not establish a connection: ", err)); 
+
 app.use(express.json({limit: '50mb'})); 
 app.use(express.urlencoded({limit: '50mb', extended: true})); 
 app.use(express.static(path.join(__dirname, '/public'))); 
