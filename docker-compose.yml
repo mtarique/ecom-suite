@@ -10,6 +10,7 @@ services:
       - "4001:3000"
     volumes: 
       - ./api:/app
+      - /app/node_modules
     env_file: 
       - ./api/.env
     networks: 
@@ -27,7 +28,8 @@ services:
       - "4002:3000"
     volumes:
       - ./web:/app
-      - ./web/node_modules:/app/node_modules
+      - /app/node_modules
+      # - ./web/node_modules:/app/node_modules
     env_file: 
       - ./web/.env
     # environment:
@@ -45,7 +47,8 @@ services:
       - "4003:3000"
     volumes:
       - ./cms:/app
-      - ./cms/node_modules:/app/node_modules
+      - /app/node_modules
+      # - ./cms/node_modules:/app/node_modules
     env_file:
       - ./cms/.env
     networks: 
