@@ -6,7 +6,8 @@ import { Link, useHistory } from 'react-router-dom'; // To navigate after succes
 
 const Signup = () => {
   // State to store username and password
-  const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
 //   const history = useHistory(); // Hook for navigation
@@ -15,7 +16,7 @@ const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:4001/signup', { username, password });
+      const response = await axios.post('http://localhost:4001/signup', { name, email, password });
       alert('Signup successful!');
       // Redirect to login or another page
       history.push('/login'); // Redirect to login page after successful signup
@@ -28,13 +29,25 @@ const Signup = () => {
     <div>
       <h2>Signup</h2>
       <form onSubmit={handleSignup}>
-        <div>
-          <label htmlFor="username">Username:</label>
+      <div>
+          <label htmlFor="name">Name:</label>
           <input
             type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            id="name"
+            value={name}
+            className="form-control"
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            className="form-control"
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>

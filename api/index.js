@@ -37,11 +37,14 @@ const LocalStrategy = require('passport-local').Strategy;
 
 // Passport Local Strategy
 passport.use(new LocalStrategy(
-    async (username, password, done) => {
+    async (email, password, done) => {
         try {
-            // Find the user by username
-            const user = await User.findOne({ username });
-            if (!user) return done(null, false, { message: 'Incorrect username.' });
+            // Find the user by email
+            const user = await User.findOne({ email });
+            if (!user) {
+                console.log("User not found")
+                return done(null, false, { message: 'Incorrect username.' });
+            }
 
             // Compare the password
             const isMatch = await user.comparePassword(password);
@@ -49,6 +52,7 @@ passport.use(new LocalStrategy(
 
             return done(null, user); // Successful authentication
         } catch (err) {
+            console.log(err)
             return done(err);
         }
     }
@@ -67,17 +71,17 @@ passport.deserializeUser(async (id, done) => {
 
 // Signup Route
 app.post('/signup', async (req, res) => {
-    const { username, password } = req.body;
+    const { name, email, password } = req.body;
 
     try {
         // Check if user already exists
-        const existingUser = await User.findOne({ username });
+        const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).send('User already exists');
         }
 
         // Create a new user
-        const newUser = new User({ username, password });
+        const newUser = new User({ name, email, password });
         await newUser.save();
 
         res.status(201).send('User registered successfully');
@@ -96,7 +100,7 @@ app.post('/login', passport.authenticate('local', {
 // Dashboard Route (Protected)
 app.get('/dashboard', (req, res) => {
     if (req.isAuthenticated()) {
-      res.send(`Welcome, ${req.user.username}`); // Show user data
+      res.send(`Welcome, ${req.user.email}`); // Show user data
     } else {
       res.status(401).send('Unauthorized');
     }
