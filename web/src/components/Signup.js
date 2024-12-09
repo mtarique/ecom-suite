@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom'; // To navigate after successful signup
+import { Link, useHistory } from 'react-router-dom'; // To navigate after successful signup
 
 const Signup = () => {
   // State to store username and password
@@ -50,6 +50,7 @@ const Signup = () => {
           />
         </div>
         <button type="submit" className="btn btn-sm btn-primary">Sign up</button>
+        Already have an account? <Link to="/signin">Sign in</Link>
       </form>
     </div>
   );

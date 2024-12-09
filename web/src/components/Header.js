@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom"
 import NavMenu from "./NavMenu";
 
 const Header = () => {
@@ -39,10 +40,12 @@ const Header = () => {
 								<span className="custom-badge position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">4</span>
 							</div>
 							<div role="button" className="text-muted me-5 list-inline-item">
+								<Link to="/signup">
 								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
 									<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
 									<circle cx="12" cy="7" r="4"></circle>
 								</svg>
+								</Link>
 							</div>
 							<div role="button" className="me-5 me-lg-0 text-muted position-relative list-inline-item">
 								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
