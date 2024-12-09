@@ -44,11 +44,12 @@ const Signup = () => {
             type="password"
             id="password"
             value={password}
+            className="form-control"
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
-        <button type="submit">Signup</button>
+        <button type="submit" className="btn btn-sm btn-primary">Sign up</button>
       </form>
     </div>
   );

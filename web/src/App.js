@@ -3,19 +3,23 @@ import "./App.css";
 import { BrowserRouter, Route, Routes, Switch } from 'react-router-dom';
 import Layout from "./components/Layout";
 import Signup from './components/Signup';
-import Signin from './components/Signin'; // Your Login component
+import Signin from './components/Signin';
+import Home from './components/Home';
 
 const App = () => {
-  return (
-    <div>
-      <BrowserRouter>
-        <Routes>
-          <Route exact path="/signup" element={<Signup />} />
-          <Route exact path="/signin" element={<Signin />} />
-        </Routes>
-      </BrowserRouter>
-    </div>
-  );
+	return (
+		<div>
+			<BrowserRouter>
+				<Routes>
+					<Route element={<Layout />}>
+						<Route exact path="/" element={<Home />} />
+					</Route>
+					<Route exact path="/signup" element={<Signup />} />
+					<Route exact path="/signin" element={<Signin />} />
+				</Routes>
+			</BrowserRouter>
+		</div>
+	);
 };
 
 // function App() {
