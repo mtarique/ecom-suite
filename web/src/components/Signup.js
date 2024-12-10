@@ -16,7 +16,7 @@ const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:4001/signup', { name, email, password });
+      const response = await axios.post('http://localhost:4001/api/auth/signup', { name, email, password });
       alert('Signup successful!');
       // Redirect to login or another page
       history.push('/login'); // Redirect to login page after successful signup

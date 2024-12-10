@@ -1,6 +1,7 @@
 // server.js or app.js
 const express = require('express');
 const mongoose = require('mongoose');
+const morgan = require('morgan'); 
 const passport = require('passport');
 const session = require('express-session');
 const cors = require('cors');
@@ -16,9 +17,11 @@ mongoose.connect(`mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD
 app.use(express.json()); // To parse JSON request bodies
 app.use(express.urlencoded({ extended: true }));
 
+app.use(morgan('dev')); 
+
 // Enable CORS (React frontend and Node backend are on different ports)
 app.use(cors({
-    origin: ['http://localhost:4002', 'http://localhost:4002'],
+    origin: 'http://localhost:4002',
     credentials: true
 }));
 
@@ -41,6 +44,7 @@ passport.use(new LocalStrategy(
         try {
             // Find the user by email
             const user = await User.findOne({ email });
+            // console.log(user)
             if (!user) {
                 console.log("User not found")
                 return done(null, false, { message: 'Incorrect username.' });
@@ -92,10 +96,44 @@ app.post('/signup', async (req, res) => {
 });
 
 // Login Route
-app.post('/login', passport.authenticate('local', {
+app.post('/login-1', passport.authenticate('local', {
     successRedirect: '/dashboard',
+    // failureRedirect: 'http://localhost:4002'
     failureRedirect: '/login',
 }));
+
+app.post('/login', (req, res, next) => {
+    passport.authenticate('local', (err, user, info) => {
+        // console.log("Error ==========> " , err);
+        // console.log("User ==========> " , user);
+        // console.log("Info ==========> " , info);
+
+        if (err) {
+            // Handle errors and send an error response
+            return res.status(500).json({ success: false, message: 'Internal Server Error', error: err });
+        }
+        if (!user) {
+            // Send a response on authentication failure
+            return res.status(401).json({ success: false, message: 'Invalid credentials' });
+        }
+        req.logIn(user, (err) => {
+            if (err) {
+                // Handle login errors
+                return res.status(500).json({ success: false, message: 'Login failed', error: err });
+            }
+            // Send a success response with user details or token
+            return res.status(200).json({
+                success: true,
+                message: 'Login successful',
+                user: {
+                    id: user.id,
+                    email: user.email,
+                    name: user.name, // Include any user details you want to expose
+                },
+            });
+        });
+    });
+});
 
 // Dashboard Route (Protected)
 app.get('/dashboard', (req, res) => {
