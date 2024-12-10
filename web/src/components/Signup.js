@@ -26,11 +26,16 @@ const Signup = () => {
   };
 
   return (
-    <div>
-      <h2>Signup</h2>
-      <form onSubmit={handleSignup}>
-      <div>
-          <label htmlFor="name">Name:</label>
+    <div className="container mt-5">
+      <div className="d-flex justify-content-center align-items-center">
+    <div className="card p-3" style={{width: "24rem"}}>
+      <div className="card-header border-bottom-0 bg-white">
+        <h3 className="card-title">Sign up</h3>
+      </div>
+      <div className="card-body">
+      <form onSubmit={handleSignup} className="mb-3">
+      <div className="mb-3">
+          <label className="form-label" htmlFor="name">Name</label>
           <input
             type="text"
             id="name"
@@ -40,8 +45,8 @@ const Signup = () => {
             required
           />
         </div>
-        <div>
-          <label htmlFor="email">Email:</label>
+        <div className="mb-3">
+          <label className="form-label" htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
@@ -51,8 +56,8 @@ const Signup = () => {
             required
           />
         </div>
-        <div>
-          <label htmlFor="password">Password:</label>
+        <div className="mb-3">
+          <label className="form-label" htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
@@ -62,10 +67,13 @@ const Signup = () => {
             required
           />
         </div>
-        <button type="submit" className="btn btn-sm btn-primary">Sign up</button>
-        Already have an account? <Link to="/signin">Sign in</Link>
+        <button type="submit" className="btn btn-primary">Sign up</button>
+        
       </form>
+      <p>Already have an account? <Link to="/signin">Sign in</Link></p>
     </div>
+    </div>
+    </div></div>
   );
 };
 

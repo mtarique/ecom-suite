@@ -27,7 +27,7 @@ router.post('/login', (req, res, next) => {
   passport.authenticate('local', { session: false }, (err, user, info) => {
     if (err || !user) return res.status(400).json({ message: info?.message || 'Login failed' });
 
-    const payload = { id: user.id, email: user.email };
+    const payload = { id: user.id, name: user.name, email: user.email };
     const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1d' });
 
     res.json({ token });

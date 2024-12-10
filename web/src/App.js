@@ -5,6 +5,7 @@ import Layout from "./components/Layout";
 import Signup from './components/Signup';
 import Signin from './components/Signin';
 import Home from './components/Home';
+import Dashboard from './components/Dashboard';
 
 const App = () => {
 	return (
@@ -13,9 +14,12 @@ const App = () => {
 				<Routes>
 					<Route element={<Layout />}>
 						<Route exact path="/" element={<Home />} />
+						<Route exact path="/dashboard" element={<Dashboard />} />
 					</Route>
-					<Route exact path="/signup" element={<Signup />} />
-					<Route exact path="/signin" element={<Signin />} />
+	
+					<Route exact path="/signup" element={<div className="container"><Signup /></div>} />
+					<Route exact path="/signin" element={<div className="container"><Signin /></div>} />
+
 				</Routes>
 			</BrowserRouter>
 		</div>
