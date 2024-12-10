@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link, useHistory } from 'react-router-dom'; // To navigate after successful signup
+import { Link } from 'react-router-dom'; // To navigate after successful signup
 
 const Signup = () => {
   // State to store username and password
@@ -19,7 +19,7 @@ const Signup = () => {
       const response = await axios.post('http://localhost:4001/api/auth/signup', { name, email, password });
       alert('Signup successful!');
       // Redirect to login or another page
-      history.push('/login'); // Redirect to login page after successful signup
+      // history.push('/login'); // Redirect to login page after successful signup
     } catch (error) {
       alert('Signup failed');
     }
