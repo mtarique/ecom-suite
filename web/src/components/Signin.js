@@ -11,15 +11,25 @@ const LoginForm = () => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:4001/api/auth/login', { email, password }, { withCredentials: true });
-      
-      // Redirect to dashboard or another page
-      const { token } = response.data;
-      
-      // Store JWT in localStorage
-      localStorage.setItem('authToken', token);
 
-      // Redirect to Dashboard
-      navigate('/dashboard');
+      if (response.status === 200) {
+        // Redirect to dashboard or another page
+        // const { token } = response.data;
+        
+        // // Store JWT in localStorage
+        // localStorage.setItem('authToken', token);
+
+        // // Redirect to Dashboard
+        // navigate('/dashboard');
+
+        // Redirect to dashboard page on successful login
+        window.location.href = '/dashboard';
+      } else { 
+        alert('Login failed, Please check your credentials.');
+      }
+
+      
+      
 
     } catch (error) {
       console.log("Login error ===> ", error)

@@ -30,7 +30,18 @@ router.post('/login', (req, res, next) => {
     const payload = { id: user.id, name: user.name, email: user.email };
     const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1d' });
 
-    res.json({ token });
+    // res.json({ token });
+
+    // Set JWT as HttpOnly cookie
+    res.cookie('authToken', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production', // true in production for HTTPS
+      sameSite: 'None', // Allows cross-origin cookies
+      maxAge: 24 * 60 * 60 * 1000, // 1 day
+    });
+
+    // Send user info in response
+    res.status(200).json({ user: payload });
   })(req, res, next);
 });
 
