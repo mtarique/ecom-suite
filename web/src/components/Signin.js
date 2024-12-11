@@ -9,6 +9,7 @@ const LoginForm = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    /*
     try {
       const response = await axios.post('http://localhost:4001/api/auth/login', { email, password }, { withCredentials: true });
       
@@ -25,6 +26,18 @@ const LoginForm = () => {
       console.log("Login error ===> ", error)
       alert('Login failed, Please check your credentials.');
     }
+      */
+
+    try {
+        const response = await axios.post('http://localhost:4001/api/user/login', { email, password }, { withCredentials: true });
+        if (response.data.status) {
+          // history.push('/dashboard');
+          navigate('/dashboard'); 
+        }
+      } catch (err) {
+        // setError(err.response ? err.response.data.message : 'An error occurred');
+        alert('Login failed');
+      }
   };
 
   return (

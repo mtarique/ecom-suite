@@ -2,27 +2,39 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; // To navigate after successful signup
+import { Link, useNavigate } from 'react-router-dom'; // To navigate after successful signup
 
 const Signup = () => {
   // State to store username and password
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
 //   const history = useHistory(); // Hook for navigation
 
   // Handle the signup form submission
   const handleSignup = async (e) => {
     e.preventDefault();
-    try {
+    /*try {
       const response = await axios.post('http://localhost:4001/api/auth/signup', { name, email, password });
       alert('Signup successful!');
       // Redirect to login or another page
       // history.push('/login'); // Redirect to login page after successful signup
     } catch (error) {
       alert('Signup failed');
-    }
+    }*/
+
+      try {
+        const response = await axios.post('http://localhost:4001/api/user/signup', { name, email, password }, { withCredentials: true });
+        if (response.data.status) {
+          // history.push('/dashboard');
+          navigate('/dashboard'); 
+        }
+      } catch (err) {
+        // setError(err.response ? err.response.data.message : 'An error occurred');
+        alert('Signup failed');
+      }
   };
 
   return (

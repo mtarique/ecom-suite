@@ -8,7 +8,10 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const User = require('./models/User');
 const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/user'); 
 const passportConfig = require('./config/passport');
+const cookieParser = require('cookie-parser');
+
 
 dotenv.config();
 const app = express();
@@ -17,6 +20,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(morgan('dev')); 
+app.use(cookieParser()); // This needs to be added before your routes/middleware
 // Enable CORS (React frontend and Node backend are on different ports)
 app.use(cors({
     origin: 'http://localhost:4002',
@@ -33,6 +37,7 @@ mongoose
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/user', userRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
