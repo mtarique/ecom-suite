@@ -28,12 +28,16 @@ const Signup = () => {
       try {
         const response = await axios.post('http://localhost:4001/api/user/signup', { name, email, password }, { withCredentials: true });
         if (response.data.status) {
+     
           // history.push('/dashboard');
           navigate('/dashboard'); 
+        } else {
+          alert(response.data.message);
         }
       } catch (err) {
         // setError(err.response ? err.response.data.message : 'An error occurred');
-        alert('Signup failed');
+        console.log(err)
+        alert(err.response ? err.response.data.message : 'An error occurred');
       }
   };
 
